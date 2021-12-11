@@ -76,7 +76,7 @@ namespace Winapi
 			out ProcessInfo lpProcessInformation
 		);
 		[DllImport("Kernel32.dll", EntryPoint = "RtlZeroMemory", SetLastError = true)]
-		static extern void ZeroMemory(IntPtr dest, IntPtr size);
+		public static extern void ZeroMemory(IntPtr dest, IntPtr size);
 
 		[DllImport("kernel32.dll", EntryPoint = "WaitForMultipleObjects", SetLastError = true)]
 		public static extern int WaitForMultipleObjects(uint nCount, IntPtr[] lpHandles, bool fWaitAll, uint dwMilliseconds);
@@ -91,7 +91,7 @@ namespace Winapi
 		   [In] NativeOverlapped* lpOverlapped);
 
         [DllImport("kernel32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-		private static extern bool ReadFileEx(
+		public static extern bool ReadFileEx(
 			IntPtr hFile,
 			[Out] byte[] buffer,
 			[In] uint numberOfBytesToRead,
@@ -99,14 +99,14 @@ namespace Winapi
 			[MarshalAs(UnmanagedType.FunctionPtr)] IOCompletionCallback completionRoutine);
 
 		[DllImport("kernel32.dll", SetLastError = true)]
-		private static extern bool WriteFileEx(IntPtr hFile,
+		public static extern bool WriteFileEx(IntPtr hFile,
 			[MarshalAs(UnmanagedType.LPArray)] byte[] buffer,
 			uint numberOfBytesToWrite,
 			[In] ref NativeOverlapped overlapped,
 			[MarshalAs(UnmanagedType.FunctionPtr)] IOCompletionCallback completionRoutine);
 
 		[DllImport("kernel32.dll", SetLastError = true)]
-		private static extern uint timeGetTime();
+		public static extern uint timeGetTime();
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		public static extern int SleepEx(
@@ -118,5 +118,19 @@ namespace Winapi
 
 		[DllImport("kernel32.dll", SetLastError = true)]
 		public static extern bool ReleaseSemaphore(IntPtr hSemaphore, int lReleaseCount, out int lpPreviousCount);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern IntPtr CreateEvent(IntPtr lpEventAttributes, bool bManualReset, bool bInitialState, string lpName);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern IntPtr CreateNamedPipe(string lpName, uint dwOpenMode,
+		   uint dwPipeMode, uint nMaxInstances, uint nOutBufferSize, uint nInBufferSize,
+		   uint nDefaultTimeOut, SECURITY_ATTRIBUTES lpSecurityAttributes);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern bool DisconnectNamedPipe(IntPtr hHandle);
+
+		[DllImport("kernel32.dll", SetLastError = true)]
+		public static extern bool ConnectNamedPipe(IntPtr hNamedPipe, [In] ref NativeOverlapped lpOverlapped);
 	}
 }

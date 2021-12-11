@@ -147,10 +147,38 @@ namespace Winapi.Flags
         FILE_MAP_ALL_ACCESS = SECTION_ALL_ACCESS
 	}
 
+	public enum PipeOpenModeFlags : uint
+	{
+		PIPE_ACCESS_DUPLEX = 0x00000003,
+		PIPE_ACCESS_INBOUND = 0x00000001,
+		PIPE_ACCESS_OUTBOUND = 0x00000002,
+		FILE_FLAG_FIRST_PIPE_INSTANCE = 0x00080000,
+		FILE_FLAG_WRITE_THROUGH = 0x80000000,
+		FILE_FLAG_OVERLAPPED = 0x40000000,
+	}
+
+	[Flags]
+	public enum PipeModeFlags : uint
+	{
+		//One of the following type modes can be specified. The same type mode must be specified for each instance of the pipe.
+		PIPE_TYPE_BYTE = 0x00000000,
+		PIPE_TYPE_MESSAGE = 0x00000004,
+		//One of the following read modes can be specified. Different instances of the same pipe can specify different read modes
+		PIPE_READMODE_MESSAGE = 0x00000002,
+		//One of the following wait modes can be specified. Different instances of the same pipe can specify different wait modes.
+		PIPE_WAIT = 0x00000000,
+		PIPE_NOWAIT = 0x00000001,
+		//One of the following remote-client modes can be specified. Different instances of the same pipe can specify different 
+		//remote-client modes.
+		PIPE_ACCEPT_REMOTE_CLIENTS = 0x00000000,
+		PIPE_REJECT_REMOTE_CLIENTS = 0x00000008
+	}
+
 	public static class Constants
 	{
 		public const uint STD_OUTPUT_HANDLE = 4294967285;
 		public const uint INFINITE = 4294967295;
+		public const uint PIPE_UNLIMITED_INSTANCES = 255;
 		public const int N = 13;
 		public static readonly string mappingName = "mappinpls";
 	}

@@ -66,7 +66,7 @@ namespace OS_lab4_1
 			var usedSem = CreateSemaphore(IntPtr.Zero, 0, semaphoreCount, "usedSem");
 			var fileMutex = CreateMutex(IntPtr.Zero, false, "fileMutex");
 			
-			var fileHandle = CreateFile(@"D:\1\testfile.txt",
+			var fileHandle = CreateFile(@"C:\1\testfile.txt",
 				(uint)DesiredAccess.GENERIC_READ | (uint)DesiredAccess.GENERIC_WRITE,
 				(uint)ShareMode.FILE_SHARE_READ | (uint)ShareMode.FILE_SHARE_WRITE,
 				null,
